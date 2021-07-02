@@ -2,14 +2,6 @@
 
 ## Развертывание приложения
 1. Клонируйте репозиторий.
-```
-git@gitlab.com:unicorn-backend/archive.git
-``` 
-	или
-```
-https://gitlab.com/unicorn-backend/archive.git
-```
-
 2. Добавление полей в таблицу universal_types
     - в файле main.sql - содержится функция insert_if_not_exists_universal_types(), которая добавляет новые значения в таблицу
       universal_types. Новые значения имеют тип - signal_report
