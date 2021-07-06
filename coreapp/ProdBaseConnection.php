@@ -1,7 +1,7 @@
 <?php
 
 
-namespace archive\coreapp;
+namespace microservice_template\coreapp;
 
 use Exception;
 

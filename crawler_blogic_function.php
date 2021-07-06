@@ -4,13 +4,13 @@
 function d_answerIfTypeSignalNotIdentify($type_signal)
 {
     $message = 'Значение type_signal = ' . $type_signal . ' не может быть обработано! Отсутствует бизнес-логика' . PHP_EOL;
-    \archive\coreapp\CrawlerLogger::saveMessage($message);
+    \microservice_template\coreapp\CrawlerLogger::saveMessage($message);
 }
 
 function d_answerIfObjectTypeNotIdentify($object_type)
 {
     $message = 'Значение типа объекта = ' . $object_type . ' не может быть обработано! Отсутствует бизнес-логика' . PHP_EOL;
-    \archive\coreapp\CrawlerLogger::saveMessage($message);
+    \microservice_template\coreapp\CrawlerLogger::saveMessage($message);
 }
 
 function d_checkParameterDay(string $date)

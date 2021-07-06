@@ -1,12 +1,12 @@
 <?php
 
 
-namespace archive\app\Domain;
+namespace microservice_template\app\Domain;
 
 
-use archive\app\Infrastructure\CalculationRuleRepository;
-use archive\config\PrivilegedTypeSignal;
-use archive\coreapp\CalculationRuleListFields;
+use microservice_template\app\Infrastructure\CalculationRuleRepository;
+use microservice_template\config\PrivilegedTypeSignal;
+use microservice_template\coreapp\CalculationRuleListFields;
 
 class CalculationRuleModel
 {

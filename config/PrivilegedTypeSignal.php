@@ -1,7 +1,7 @@
 <?php
 
 
-namespace archive\config;
+namespace microservice_template\config;
 
 
 trait PrivilegedTypeSignal

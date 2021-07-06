@@ -1,8 +1,8 @@
 <?php
 
 
-namespace archive\coreapp;
-use archive\config\Routes;
+namespace microservice_template\coreapp;
+use microservice_template\config\Routes;
 
 class Router
 {

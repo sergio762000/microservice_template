@@ -3,7 +3,7 @@
 
 $start_script = microtime(true);
 require_once __DIR__ . '/coreapp/CrawlerLogger.php';
-use archive\coreapp\CrawlerLogger;
+use microservice_template\coreapp\CrawlerLogger;
 
 $parameter['timestamp'] = time() ;
 $parameter['manual_rule_id'] = 0;

@@ -19,7 +19,7 @@ function i_connectionToCalculationRule()
     $connect = pg_connect($connString, PGSQL_CONNECT_FORCE_NEW);
     if ($connect === false) {
         $message = 'БД calculation_rule недоступна. Проверьте настройки и соединение' . PHP_EOL;
-        \archive\coreapp\CrawlerLogger::saveMessage($message);
+        \microservice_template\coreapp\CrawlerLogger::saveMessage($message);
         die($message);
     }
 

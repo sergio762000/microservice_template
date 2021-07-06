@@ -1,12 +1,12 @@
 <?php
 
 
-namespace archive\app\Infrastructure;
+namespace microservice_template\app\Infrastructure;
 
 
-use archive\coreapp\ArchiveConnection;
-use archive\coreapp\CalculationRuleConnection;
-use archive\coreapp\PDOLogger;
+use microservice_template\coreapp\ArchiveConnection;
+use microservice_template\coreapp\CalculationRuleConnection;
+use microservice_template\coreapp\PDOLogger;
 
 class CalculatedDataRepository
 {
