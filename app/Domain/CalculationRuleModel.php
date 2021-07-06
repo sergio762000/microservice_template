@@ -204,7 +204,6 @@ class CalculationRuleModel
         }
 
         if (isset($dataForValidate['type_signal'])) {
-            //сходить в базу ujin, проверить наличие такового
             $resultOperation = $this->repository->findTypeSignal($dataForValidate['type_signal']);
             if (!$resultOperation) {
                 $isValid['status'] = false;
@@ -217,7 +216,6 @@ class CalculationRuleModel
 
             $tagNameList = $this->preliminaryClearListTags($dataForValidate, 'tags_device');
 
-            //сходить в базу ujin, проверить наличие такового
             $resultOperation = $this->repository->findTagsDevice($tagNameList);
 
             if (!$resultOperation) {
@@ -248,7 +246,6 @@ class CalculationRuleModel
                     unset($dataForValidate['tags_signal']);
                 }
             } else {
-                //сходить в базу ujin
                 $resultOperation = $this->repository->findTagsSignal($tagNameList);
                 if (!$resultOperation) {
                     //если тэги устройств не найдены
