@@ -1,10 +1,10 @@
 <?php
 
 
-namespace archive\app\Controller;
+namespace microservice_template\app\Controller;
 
 
-use archive\app\Domain\CalculatedDataModel;
+use microservice_template\app\Domain\CalculatedDataModel;
 
 class CalculatedDataController
 {

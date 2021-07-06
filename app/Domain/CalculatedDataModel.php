@@ -1,10 +1,10 @@
 <?php
 
 
-namespace archive\app\Domain;
+namespace microservice_template\app\Domain;
 
 
-use archive\app\Infrastructure\CalculatedDataRepository;
+use microservice_template\app\Infrastructure\CalculatedDataRepository;
 
 class CalculatedDataModel
 {

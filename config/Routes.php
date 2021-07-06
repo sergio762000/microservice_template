@@ -1,7 +1,7 @@
 <?php
 
 
-namespace archive\config;
+namespace microservice_template\config;
 
 
 trait Routes
@@ -10,10 +10,10 @@ trait Routes
     {
         //'{path}'  => array('{path_to_Controller}', {'method_in_Controller'})
         return array(
-            '/' => array('archive\app\Controller\CalculationRuleController', 'default'),
-            '/index.php' => array('archive\app\Controller\CalculationRuleController', 'default'),
-            '/calculation_rule' => array('archive\app\Controller\CalculationRuleController', 'calculationRule'),
-            '/calculated_data' => array('archive\app\Controller\CalculatedDataController', 'calculationDeltaValueLastPeriod'),
+            '/' => array('microservice_template\app\Controller\CalculationRuleController', 'default'),
+            '/index.php' => array('microservice_template\app\Controller\CalculationRuleController', 'default'),
+            '/calculation_rule' => array('microservice_template\app\Controller\CalculationRuleController', 'calculationRule'),
+            '/calculated_data' => array('microservice_template\app\Controller\CalculatedDataController', 'calculationDeltaValueLastPeriod'),
         );
     }
 }
