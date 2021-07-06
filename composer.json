@@ -1,4 +1,11 @@
 {
+    "autoload": {
+        "psr-4": {
+            "microservice_template\\app\\": "app/",
+            "microservice_template\\config\\": "config/",
+            "microservice_template\\coreapp\\": "coreapp/"
+        }
+    },
     "require": {
         "phpunit/phpunit": "^9.5"
     }

@@ -26,6 +26,11 @@ class Router
         return $result;
     }
 
+    public function getInitRoutes()
+    {
+        return $this->route;
+    }
+
     public function initRoutes()
     {
         foreach ($this->getRoutes() as $uriWOQueryString => $pairControllerAndAction) {
