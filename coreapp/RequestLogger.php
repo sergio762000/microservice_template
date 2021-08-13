@@ -1,12 +1,13 @@
 <?php
 
 
-namespace archive\coreapp;
+namespace microservice_template\coreapp;
 
 
 abstract class RequestLogger
 {
     const REQUEST_LOG_FILE = __DIR__ . '/../log/phpInput.log';
+    const MAX_SIZE_FILE_IN_BYTES = 2000000;
 
     public static function saveRequestToLog($jsonString)
     {
@@ -30,25 +31,48 @@ abstract class RequestLogger
         }
 
         $fh = fopen(self::REQUEST_LOG_FILE, 'a');
-        if (filesize(self::REQUEST_LOG_FILE) > 2000000) {
-            $archFile = self::REQUEST_LOG_FILE . '_' . time();
-            if (!touch($archFile)) {
-                fputs($fh, 'Не могу сделать touch для файла: ' . $archFile);
-            }
-            chmod($archFile, 0755);
-            if (!copy(self::REQUEST_LOG_FILE, $archFile)) {
-                $stringForRecordAlarm = 'Не могу скопировать в файл: ' . $archFile;
-                fputs($fh, $stringForRecordAlarm);
-            } else {
-                ftruncate($fh, 0);
-                rewind($fh);
-                fputs($fh, '=====================================');
-                fputs($fh, 'Предыдущий файл - ' . $archFile);
-                fputs($fh, '=====================================');
-            }
-        }
-        fputs($fh, $stringForRecord);
+        fwrite($fh, $stringForRecord);
         fclose($fh);
+
+        clearstatcache(true, self::REQUEST_LOG_FILE);
+
+        if ((filesize(self::REQUEST_LOG_FILE) - self::MAX_SIZE_FILE_IN_BYTES) > 0) {
+            $fh = fopen(self::REQUEST_LOG_FILE, 'a+');
+            fwrite($fh, 'Размер файла phpInput.log превысил максимальный размер: 2000000 байт'. PHP_EOL);
+            fwrite($fh, 'Запущена процедура архивирования файла'. PHP_EOL);
+            fclose($fh);
+            self::createArchiveFile();
+        }
     }
 
+    private static function createArchiveFile()
+    {
+        $archFile = self::REQUEST_LOG_FILE . '_' . date('Y_m_d-His', time());
+
+        if (touch($archFile) == true) {
+            if (chmod($archFile, 0766) == true) {
+                if (copy(self::REQUEST_LOG_FILE, $archFile) == true) {
+                    $fh = fopen(self::REQUEST_LOG_FILE, 'w');
+                    fwrite($fh, '=====================================' . PHP_EOL);
+                    fwrite($fh, 'Предыдущий файл - ' . $archFile . PHP_EOL);
+                    fwrite($fh, '=====================================' . PHP_EOL);
+                    fclose($fh);
+                } else {
+                    $fh = fopen(self::REQUEST_LOG_FILE, 'a+');
+                    $stringForRecordAlarm = 'Не могу скопировать в файл: ' . $archFile . PHP_EOL;
+                    fwrite($fh, $stringForRecordAlarm);
+                    fclose($fh);
+                }
+            } else {
+                $stringForRecordAlarm = 'Не могу установить доступ в 0766 для - ' . $archFile . PHP_EOL;
+                $fh = fopen(self::REQUEST_LOG_FILE, 'a+');
+                fwrite($fh, $stringForRecordAlarm);
+                fclose($fh);
+            }
+        } else {
+            $fh = fopen(self::REQUEST_LOG_FILE, 'a+');
+            fwrite($fh, 'Не могу сделать touch для файла: ' . $archFile . PHP_EOL);
+            fclose($fh);
+        }
+    }
 }

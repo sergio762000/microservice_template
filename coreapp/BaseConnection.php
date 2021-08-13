@@ -1,16 +1,17 @@
 <?php
 
 
-namespace archive\coreapp;
-
+namespace microservice_template\coreapp;
 
 use Exception;
 
-abstract class CalculationRuleConnection
+abstract class BaseConnection
 {
-    public static function getConnectionToCalculationRuleDB(): \PDO
+
+    public static function getConnectionToProdBase(): \PDO
     {
-        $db_conf = parse_ini_file(__DIR__ . '/../config/database.calculation_rule.conf');
+
+        $db_conf = parse_ini_file(__DIR__ . '/../config/database.example.conf');
 
         $dsn = $db_conf['type']
             . ":host="      . $db_conf['host']
@@ -27,7 +28,7 @@ abstract class CalculationRuleConnection
         } catch (Exception $exception) {
             PDOLogger::saveMessageToLog($exception);
             $response = json_encode(array(
-                'action' => "Подключение к $dsn не удалось, Сущность - CalculationRule",
+                'action' => "Подключение к $dsn не удалось.",
                 'error' => '1',
                 'message' => 'Более подробная информация находится в ' . realpath(PDOLogger::PDO_LOG_FILE),
             ), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
@@ -40,3 +41,4 @@ abstract class CalculationRuleConnection
     }
 
 }
+
