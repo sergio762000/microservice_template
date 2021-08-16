@@ -1,4 +1,6 @@
 <?php
+
+use microservice_template\coreapp\AppExceptionLogger;
 use microservice_template\coreapp\Application;
 use microservice_template\coreapp\ConfigHandler;
 use microservice_template\coreapp\ContentHandler;
@@ -12,10 +14,15 @@ if (WORK_MODE_APP == 'dev') {
     ini_set('display_errors', true);
 }
 
-$router = new Router();
-$router->initRoutes();
+try {
+    $router = new Router();
+    $router->initRoutes();
 
-$application = new Application($router, ContentHandler::getContentFromRequest());
-$response = $application->run();
+    $application = new Application($router, ContentHandler::getContentFromRequest());
+    $response = $application->run();
 
-$application->terminate($response);
+    $application->terminate($response);
+} catch (Exception $exception) {
+    AppExceptionLogger::saveException($exception);
+}
+
