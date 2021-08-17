@@ -6,6 +6,7 @@ use microservice_template\coreapp\ConfigHandler;
 use microservice_template\coreapp\ContentHandler;
 use microservice_template\coreapp\Router;
 
+try {
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'autoload.php';
 defined('WORK_MODE_APP') or define('WORK_MODE_APP', ConfigHandler::getApplicationMode());
 
@@ -14,7 +15,7 @@ if (WORK_MODE_APP == 'dev') {
     ini_set('display_errors', true);
 }
 
-try {
+
     $router = new Router();
     $router->initRoutes();
 
